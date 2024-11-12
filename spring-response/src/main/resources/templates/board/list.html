@@ -10,6 +10,28 @@
 
     <a href="/board/insert">글쓰기</a>
 
+    <!--
+        🍃thymeleaf (타임리프)
+        : java에서 스프링으로 html 템플릿을 작성하고 서버에서 랜더링해주는 템플릿 엔진
+          ⭐서버에서 동적 html 페이지를 생성하는 것이 목적
+
+        ⭐ 타임리프 기본 문법 키워드
+         th:(속성)
+
+        👩‍💻 텍스트 출력
+        * th:text="${ 변수 }"
+        - 변수 : th:text="${ name }"
+        - 객체 : th:text="${ person.name }"
+
+        🎁model - name=김조은
+        <span th:text="${name}">이름</span>
+        ➡ <span>김조은</span>
+
+        👩‍💻 반복문
+        * th:each="객체명 : ${컬렉션명}"
+        - th:each="board : ${boardList}"
+
+    -->
     <table border="1">
         <tr>
             <th width="50">번호</th>
@@ -18,14 +40,34 @@
             <th width="200">등록일자</th>
             <th width="200">수정일자</th>
         </tr>
+        <!-- 
+            <th:block> : 논리적으로 처리하는 태그 (투명 태그)
+        -->
+        <th:block th:each=" board : ${boardList} ">
+            <tr>
+                <td th:text="${board.no}"></td>
+                <td>
+                    <!-- th:??="|문자열+${표현식}|" -->
+                    <!-- ⭐문자열과 ${}표현식을 같이 사용할 때, |?| 로 묶어준다. -->
+                    <a th:href="|/board/read?no=${board.no}|" 
+                       th:text="${board.title}"></a>
+                </td>
+                <td th:text="${board.writer}"></td>
+                <!--
+                    유틸리티객체.메소드()
+                    #dates.format( 날짜객체, '날짜포맷' )
+                    - #dates.format( board.createdAt, 'yyyy-MM-dd HH:mm:ss' )
+                -->
+                <td align="center">
+                    <span th:text="${ #dates.format( board.createdAt, 'yyyy-MM-dd HH:mm:ss' )  }"></span>
+                </td>
+                <td align="center">
+                    <span th:text="${ #dates.format( board.updatedAt, 'yyyy-MM-dd HH:mm:ss' )  }"></span>
+                </td>
+            </tr>
+        </th:block>
 
-        <tr th:each=" board : ${boardList} ">
-            <td th:text="${board.no}"></td>
-            <td th:text="${board.title}"></td>
-            <td th:text="${board.writer}"></td>
-            <td th:text="${board.createdAt}"></td>
-            <td th:text="${board.updatedAt}"></td>
-        </tr>
+        
     </table>
 </body>
 </html>
