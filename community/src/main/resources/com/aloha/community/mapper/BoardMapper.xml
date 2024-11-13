@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace="매퍼 인터페이스 경로" -->
+<mapper namespace="com.aloha.community.mapper.BoardMapper">
+
+    <!-- 목록 -->
+    <select id="list" resultType="Board">
+        SELECT *
+        FROM board
+    </select>
+
+    <!-- 조회 -->
+    <select id="select" resultType="Board" >
+        SELECT *
+        FROM board
+        WHERE id = #{id}
+    </select>
+
+    <!-- 등록 -->
+    <!-- ⭐Mybatis 의 useGeneratedKeys 를 사용하면
+          MySQL 의 AUTO_INCREMENT 되는 값을 전달한 객체에 지정한 변수로 매핑할 수 있다.    
+     -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="no">
+        INSERT INTO board ( id, title, writer, content )
+        VALUES ( #{id}, #{title}, #{writer}, #{content} )
+    </insert>
+
+    <!-- 수정 -->
+    <update id="update">
+        UPDATE board 
+           SET title = #{title}
+              ,writer = #{writer}
+              ,content = #{content}
+              ,updated_at = now()
+        WHERE id = #{id}
+    </update>
+
+    <!-- 삭제 -->
+    <delete id="delete">
+        DELETE FROM board
+        WHERE id = #{id}
+    </delete>
+		
+
+</mapper>

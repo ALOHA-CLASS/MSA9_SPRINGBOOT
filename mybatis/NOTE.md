@@ -1,4 +1,4 @@
-# MyBatis 로 데이처 처리 및 기능 구현
+# MyBatis 로 데이터 처리 및 기능 구현
 1. table 생성
 2. table 에 연결될 DTO 생성
 3. Mapper.xml 파일 생성 및 SQL 작성
