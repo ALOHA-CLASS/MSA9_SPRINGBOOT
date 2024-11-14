@@ -115,9 +115,20 @@ public class BoardController {
     */
     @GetMapping("/update")
     public String update(Model model
-                      , @RequestParam("id") String id) throws Exception {
+                      , @RequestParam("id") String id
+                      , Files file) throws Exception {
+        // 게시글 조회
         Board board = boardService.select(id);
         model.addAttribute("board", board);
+
+        // 파일 목록 조회
+        file.setParentNo(board.getNo());
+        file.setParentTable("board");
+
+        log.info("file : " + file);
+        List<Files> fileList = fileService.listByParent(file);
+        model.addAttribute("fileList", fileList);
+
         return "/board/update";
     }
     
