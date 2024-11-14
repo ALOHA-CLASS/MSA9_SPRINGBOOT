@@ -33,6 +33,7 @@
                 </td>
             </tr>
         </table>
+        
         <h3>파일목록</h3>
         <section id="file-list">
             <table border="1">
@@ -45,6 +46,11 @@
                     <th>타입</th>
                     <th>액션</th>
                 </tr>
+                <th:block th:if="${fileList.isEmpty()}">
+                    <tr>
+                        <td colspan="6" align="center">조회된 데이터가 없습니다.</td>
+                    </tr>
+                </th:block>
                 <th:block th:each="file : ${fileList}">
                     <tr>
                         <td><span th:text="${file.no}"></span></td>
@@ -62,8 +68,36 @@
                 </th:block>
             </table>
         </section>
-    </form>
 
+    </form>
+    <h3>댓글목록</h3>
+    <section id="comment-list">
+
+    </section>
+
+    <section id="comment-form">
+        <form action="">
+            <table>
+                <tr>
+                    <td>작성자</td>
+                    <td>
+                        <input type="text" name="writer" id="writer">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <textarea name="content" id="content" rows="5" cols="40"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="right">
+                        <button type="button" onclick="insertComment()">등록</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </section>
+    <div style="height: 300px;"></div>
     <script>
         // 수정 화면 이동
         function update() {
@@ -96,6 +130,81 @@
             request.open('GET', url, true)
             request.send()
         }
+
+        // 댓글 등록
+        function insertComment() {
+            const boardNo = "[[${board.no}]]"
+            let writer = document.getElementById('writer').value
+            let content = document.getElementById('content').value
+            console.log(`writer : ${writer}`);
+            console.log(`content : ${content}`);
+
+            let data = {
+                'boardNo' : boardNo,
+                'writer' : writer,
+                'content' : content
+            }
+
+            let request = new XMLHttpRequest()
+            let url = '/comment'
+            request.open('POST', url, true)
+            request.setRequestHeader('Content-Type', 'application/json')
+            request.send( JSON.stringify(data) )
+
+            request.onreadystatechange = function() {
+                if( request.readyState == request.DONE && request.status == 200 ) {
+                    let response = request.responseText
+                    if( response == 'SUCCESS' ) {
+                        console.log('댓글 등록 성공');
+                        // 댓글 목록 갱신
+                        commentList()
+
+                        // 입력한 작성자, 내용 비우기
+                        document.getElementById('writer').value = ""
+                        document.getElementById('content').value = ""
+                    }
+                }
+            }
+            
+        }
+
+        // 댓글 목록
+        commentList()
+        function commentList() {
+            let request = new XMLHttpRequest()
+            let boardNo = "[[ ${board.no} ]]"
+            let url = `/comment?boardNo=${boardNo}`
+            request.open('GET', url, true)
+            request.send()
+
+            request.onreadystatechange = function() {
+                let commentList = request.responseText
+                let $commentList = document.getElementById('comment-list')
+                $commentList.innerHTML = commentList
+            }
+        }
+
+        // 댓글 삭제
+        function removeComment( id ) {
+            let request = new XMLHttpRequest()
+            let url = `/comment/${id}`
+            request.open('DELETE', url, true)
+            request.send()
+            request.onreadystatechange = function() {
+                if( request.readyState == request.DONE && request.status == 200 ) {
+                    let response = request.responseText
+                    if( response == 'SUCCESS' ) {
+                        console.log('댓글 삭제 성공');
+                        commentList()
+                    }
+                    else {
+                        alert('댓글 삭제 실패')
+                    }
+                }
+            }
+        }
+        
     </script>
+
 </body>
 </html>

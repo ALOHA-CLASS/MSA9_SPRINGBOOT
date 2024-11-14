@@ -42,6 +42,10 @@ public class BoardServiceImpl implements BoardService {
 
         if( fileList != null ) 
             for (MultipartFile file : fileList) {
+                // 빈 파일이 넘어온 경우 
+                if (file != null && file.isEmpty()) 
+                    continue;
+                
                 Files uploadFile = new Files();
                 uploadFile.setFile(file);
                 uploadFile.setParentTable("board");
