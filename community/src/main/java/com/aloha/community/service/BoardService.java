@@ -6,7 +6,10 @@ import com.aloha.community.domain.Board;
 
 public interface BoardService {
 
+    // 전체 목록
     public List<Board> list() throws Exception;
+    // 검색
+    public List<Board> list(String keyword) throws Exception;
 
     public Board select(String id) throws Exception;
 

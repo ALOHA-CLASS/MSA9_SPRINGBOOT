@@ -24,7 +24,7 @@ public class BoardServiceImpl implements BoardService {
     
     @Override
     public List<Board> list() throws Exception {
-        List<Board> list = boardMapper.list();
+        List<Board> list = boardMapper.list("");
         return list;
     }
 
@@ -87,6 +87,13 @@ public class BoardServiceImpl implements BoardService {
         int fileResult = fileService.deleteByParent(deleteFile);
         log.info("fileResult : " + fileResult);
         return result;
+    }
+
+    // 검색
+    @Override
+    public List<Board> list(String keyword) throws Exception {
+        List<Board> boardList = boardMapper.list(keyword);
+        return boardList;
     }
     
 }

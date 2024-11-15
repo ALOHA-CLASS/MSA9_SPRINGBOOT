@@ -6,7 +6,6 @@ import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
@@ -16,6 +15,7 @@ public class Comments {
     private int no;
     private String id;
     private int boardNo;
+    private int parentNo;           // 부모 댓글 번호
     private String writer;
     private String content;
     private Date createdAt;

@@ -47,8 +47,9 @@ public class BoardController {
      * @throws Exception 
     */
     @GetMapping("/list")
-    public String list(Model model) throws Exception {
-        List<Board> boardList = boardService.list();
+    public String list(Model model
+                     , @RequestParam(name = "keyword", defaultValue = "") String keyword) throws Exception {
+        List<Board> boardList = boardService.list(keyword);
         model.addAttribute("boardList", boardList);
         return "/board/list";
     }
