@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.aloha.community.domain.Board;
 import com.aloha.community.domain.Option;
+import com.aloha.community.domain.Page;
 
 @Mapper
 public interface BoardMapper {
@@ -14,8 +15,10 @@ public interface BoardMapper {
     // public List<Board> list() throws Exception;
     // public List<Board> list(String keyword) throws Exception;
     // public List<Board> list(@Param("option") Option option) throws Exception;
+    // public List<Board> list( @Param("option") Option option
+    //                         ,@Param("rows") int rows) throws Exception;
     public List<Board> list( @Param("option") Option option
-                            ,@Param("rows") int rows) throws Exception;
+                            ,@Param("page") Page page) throws Exception;
 
     public Board select(@Param("id") String id) throws Exception;
 
@@ -24,4 +27,8 @@ public interface BoardMapper {
     public int update(Board board) throws Exception;
 
     public int delete(String id) throws Exception;
+
+    // 데이터 개수
+    public int count(@Param("option") Option option) throws Exception;
+
 }
