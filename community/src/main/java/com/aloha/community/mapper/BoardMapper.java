@@ -6,12 +6,16 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.aloha.community.domain.Board;
+import com.aloha.community.domain.Option;
 
 @Mapper
 public interface BoardMapper {
     
     // public List<Board> list() throws Exception;
-    public List<Board> list(String keyword) throws Exception;
+    // public List<Board> list(String keyword) throws Exception;
+    // public List<Board> list(@Param("option") Option option) throws Exception;
+    public List<Board> list( @Param("option") Option option
+                            ,@Param("rows") int rows) throws Exception;
 
     public Board select(@Param("id") String id) throws Exception;
 

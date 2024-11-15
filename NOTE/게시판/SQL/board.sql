@@ -1,4 +1,5 @@
 
+TRUNCATE TABLE board;
 -- 샘플데이터 추가
 INSERT INTO board (id, title, writer, content )
 VALUES (UUID(), '제목1', '작성자1', '내용1')

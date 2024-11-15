@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.aloha.community.domain.Board;
 import com.aloha.community.domain.Files;
+import com.aloha.community.domain.Option;
 import com.aloha.community.service.BoardService;
 import com.aloha.community.service.FileService;
 
@@ -48,9 +50,15 @@ public class BoardController {
     */
     @GetMapping("/list")
     public String list(Model model
-                     , @RequestParam(name = "keyword", defaultValue = "") String keyword) throws Exception {
-        List<Board> boardList = boardService.list(keyword);
+                    //  , @RequestParam(name = "keyword", defaultValue = "") String keyword
+                        , Option option
+                        , @RequestParam(name = "rows", defaultValue = "10") 
+                          int rows
+                     ) throws Exception {
+        List<Board> boardList = boardService.list(option, rows);
         model.addAttribute("boardList", boardList);
+        model.addAttribute("option", option);
+        model.addAttribute("rows", rows);
         return "/board/list";
     }
     
