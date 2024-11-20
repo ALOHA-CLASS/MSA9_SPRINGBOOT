@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체</title>
+</head>
+<body>
+    <h1>th:object</h1>
+    <!-- ⭐ th:object="${객체}" -->
+    <!-- - 상위 태그에서 객체를 등록하고, 하위 태그테서 *{변수} 형태로 접근 가능 -->
+    <div th:object="${loginUser}">
+        <ul>
+            <li th:text="*{no}"></li>
+            <li th:text="*{id}"></li>
+            <li th:text="*{username}"></li>
+            <li th:text="*{password}"></li>
+            <li th:text="*{name}"></li>
+            <li th:text="*{ #dates.format( createdAt, 'yyyy-MM-dd HH:mm:ss' ) }"></li>
+            <li th:text="*{ #dates.format( updatedAt, 'yyyy-MM-dd HH:mm:ss' ) }"></li>
+        </ul>
+    </div>
+
+    <h2>th:object - form</h2>
+    <!-- - th:field="*{변수}" ➡ id, name, value 속성을 자동으로 생성 -->
+    <form action="" method="post" th:object="${loginUser}">
+        <input type="text" th:field="*{no}">  <br>  
+        <input type="text" th:field="*{id}">    <br>
+        <input type="text" th:field="*{username}">  <br>
+        <input type="text" th:field="*{password}">  <br>
+        <input type="text" th:field="*{name}">  <br>
+        <!-- <input type="radio" id="male" th:field="*{gender}">
+        <label for="male">남자</label>
+        <input type="radio" id="female" th:field="*{gender}">
+        <label for="female">여자</label> -->
+        <br>
+        <input type="date" th:value="*{ #dates.format( createdAt, 'yyyy-MM-dd' ) }"   
+                           id="createdAt" name="createdAt"> <br>
+        <input type="date" th:value="*{ #dates.format( updatedAt, 'yyyy-MM-dd' ) }"   
+                           id="updatedAt" name="updatedAt"> <br>
+    </form>
+</body>
+</html>

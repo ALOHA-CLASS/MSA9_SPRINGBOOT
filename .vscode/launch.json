@@ -69,6 +69,16 @@
             "projectName": "community",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ThymeleafApplication<thymeleaf>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.aloha.thymeleaf.ThymeleafApplication",
+            "projectName": "thymeleaf",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
