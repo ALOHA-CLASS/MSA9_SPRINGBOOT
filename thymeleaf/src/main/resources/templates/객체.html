@@ -8,7 +8,7 @@
 <body>
     <h1>th:object</h1>
     <!-- ⭐ th:object="${객체}" -->
-    <!-- - 상위 태그에서 객체를 등록하고, 하위 태그테서 *{변수} 형태로 접근 가능 -->
+    <!-- - 상위 태그에서 객체를 등록하고, 하위 태그에서 *{변수} 형태로 접근 가능 -->
     <div th:object="${loginUser}">
         <ul>
             <li th:text="*{no}"></li>
@@ -41,9 +41,9 @@
             <option value="사용자 타입" disabled>사용자 타입</option>
             <option value="사용자">사용자</option>
             <option value="관리자">관리자</option>
-            <!-- <option value="선택안함" th:selected="*{ type == null }">선택안함</option>
+            <option value="선택안함" th:selected="*{ type == null }">선택안함</option>
             <option value="사용자" th:selected="*{ type == '사용자' }">사용자</option>
-            <option value="관리자" th:selected="*{ type == '관리자' }">관리자</option> -->
+            <option value="관리자" th:selected="*{ type == '관리자' }">관리자</option>
         </select>
         <br>
 
