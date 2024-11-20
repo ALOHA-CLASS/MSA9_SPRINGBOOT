@@ -58,5 +58,14 @@
         <input type="date" th:value="*{ #dates.format( updatedAt, 'yyyy-MM-dd' ) }"   
                            id="updatedAt" name="updatedAt"> <br>
     </form>
+
+    <hr>
+    <!-- 세션 가져오기 -->
+    <h2>${session.loginUser}</h2>
+    <h3 th:text="${session.loginUser.name}"></h3>
+    <h3 th:text="${session.loginUser.username}"></h3>
+    <h3 th:text="${session.loginUser.password}"></h3>
+
+    <div style="height: 500px;"></div>
 </body>
 </html>
