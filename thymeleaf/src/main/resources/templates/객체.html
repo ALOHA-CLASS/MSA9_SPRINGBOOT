@@ -29,11 +29,30 @@
         <input type="text" th:field="*{username}">  <br>
         <input type="text" th:field="*{password}">  <br>
         <input type="text" th:field="*{name}">  <br>
-        <!-- <input type="radio" id="male" th:field="*{gender}">
+        
+        <input type="radio" id="male" value="남자" name="gender" th:checked="*{ gender == '남자' }">
         <label for="male">남자</label>
-        <input type="radio" id="female" th:field="*{gender}">
-        <label for="female">여자</label> -->
+        <input type="radio" id="female" value="여자" name="gender" th:checked="*{ gender == '여자' }">
+        <label for="female">여자</label>
         <br>
+
+        <!-- ⭐ select 에 th:field="*{type}" 를 사용하면, type 값과 일치하는 option 을 자동으로 선택 -->
+        <select th:field="*{type}">
+            <option value="사용자 타입" disabled>사용자 타입</option>
+            <option value="사용자">사용자</option>
+            <option value="관리자">관리자</option>
+            <!-- <option value="선택안함" th:selected="*{ type == null }">선택안함</option>
+            <option value="사용자" th:selected="*{ type == '사용자' }">사용자</option>
+            <option value="관리자" th:selected="*{ type == '관리자' }">관리자</option> -->
+        </select>
+        <br>
+
+        <input type="checkbox" name="authList" id="role_user" th:checked="${ loginUser.containsAuth('ROLE_USER') }">
+        <label for="role_user">ROLE_USER</label>
+        <input type="checkbox" name="authList" id="role_admin" th:checked="${ loginUser.containsAuth('ROLE_ADMIN') }">
+        <label for="role_admin">ROLE_ADMIN</label>
+        <br>
+
         <input type="date" th:value="*{ #dates.format( createdAt, 'yyyy-MM-dd' ) }"   
                            id="createdAt" name="createdAt"> <br>
         <input type="date" th:value="*{ #dates.format( updatedAt, 'yyyy-MM-dd' ) }"   

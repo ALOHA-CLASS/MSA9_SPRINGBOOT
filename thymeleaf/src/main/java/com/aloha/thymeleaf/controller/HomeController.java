@@ -61,10 +61,11 @@ public class HomeController {
         loginUser.setUsername("ALOHA");
         loginUser.setPassword("123456");
         loginUser.setName("오승원");
-        loginUser.setGender("남자");        // 남자 여자 
-        loginUser.setType("사용자");          // 사용자 관리자
+        loginUser.setGender("여자");        // 남자 여자 
+        loginUser.setType("관리자");          // 사용자 관리자
         loginUser.setCreatedAt(new Date());
         loginUser.setUpdatedAt(new Date());
+        loginUser.setAuthList(authList);
 
         session.setAttribute("loginUser", loginUser);
         model.addAttribute("loginUser", loginUser);

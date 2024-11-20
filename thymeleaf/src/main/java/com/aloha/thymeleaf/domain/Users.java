@@ -26,4 +26,14 @@ public class Users {
     private Date updatedAt;
 
     List<UserAuth> authList;
+
+    // 사용자 권한 확인 메소드
+    public boolean containsAuth(String auth) {
+        for (UserAuth userAuth : authList) {
+            if (userAuth.getAuth().equals(auth)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
