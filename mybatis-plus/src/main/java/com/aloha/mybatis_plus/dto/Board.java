@@ -19,7 +19,7 @@ import lombok.Data;
 @TableName("board")     // 테이블명         (🐦︎💙 Mybatis plus)
 @Alias("Board")         // typealias 별칭   (🐦︎💗 Mybatis)
 public class Board {
-    @TableId(type = IdType.AUTO)        // PK 자동증가 (🐦︎💙 Mybatis plus - insert 에서 사용)
+    @TableId(type = IdType.AUTO) // PK 설정 및 자동증가 (🐦︎💙 Mybatis plus - CRUD 에 사용)
     private int no;  
     private String id;      
     private String title;

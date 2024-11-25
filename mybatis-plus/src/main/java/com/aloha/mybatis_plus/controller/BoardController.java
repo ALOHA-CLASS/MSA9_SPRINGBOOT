@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.aloha.mybatis_plus.dto.Board;
+import com.aloha.mybatis_plus.dto.Pagination;
 import com.aloha.mybatis_plus.service.BoardServiceImpl;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -50,11 +52,25 @@ public class BoardController {
      * @throws Exception 
      */
     @GetMapping("/list")
-    public String list(Model model) throws Exception {
+    public String list(Model model
+                    , @RequestParam(name = "page", required = false, defaultValue = "1") Integer page
+                    , @RequestParam(name = "size", required = false, defaultValue = "10") Integer size) throws Exception {
         // 데이터 요청
-        List<Board> boardList = boardService.list();
+        // List<Board> boardList = boardService.list();
+        Page<Board> pageInfo = boardService.list(page, size);
+        List<Board> boardList = pageInfo.getRecords();
+
+        Pagination pagination = new Pagination();
+        pagination.setPage(page);
+        pagination.setSize(size);
+        pagination.setTotal( pageInfo.getTotal() );
+
         // 모델 등록
         model.addAttribute("boardList", boardList);
+        // 페이징 정보
+        model.addAttribute("pageInfo", pageInfo);
+        model.addAttribute("pagination", pagination);
+
         // 뷰 페이지 지정
         return "/board/list";       // resources/templates/board/list.html
     }
