@@ -1,8 +1,6 @@
-package com.aloha.mybatis.dto;
+package com.aloha.pagehelper.domain;
 
 import java.util.Date;
-
-import org.apache.ibatis.type.Alias;
 
 import lombok.Data;
 
@@ -11,14 +9,13 @@ import lombok.Data;
  * - 게시글 정보
  */
 @Data
-@Alias("Board")
 public class Board {
     private int no;        
+    private String id;
     private String title;
     private String writer;
     private String content;
     private Date createdAt;
     private Date updatedAt;
-    private int views;
 }
  
