@@ -14,6 +14,7 @@ import lombok.Data;
 @Alias("Board")
 public class Board {
     private int no;        
+    private String id;
     private String title;
     private String writer;
     private String content;

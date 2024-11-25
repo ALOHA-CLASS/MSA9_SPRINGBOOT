@@ -99,6 +99,16 @@
             "projectName": "pagehelper",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MybatisPlusApplication<mybatis-plus>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.aloha.mybatis_plus.MybatisPlusApplication",
+            "projectName": "mybatis-plus",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
